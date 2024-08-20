@@ -44,7 +44,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         endpoint = self.path
 
         if endpoint == '/commit':
-            send_commit_message(msg=['commits'][0]['message'], author=data['commits'][0]['author']['name'], repo=data['repository']['full_name'], )
+            send_commit_message(msg=data['commits'][0]['message'], author=data['commits'][0]['author']['name'], repo=data['repository']['full_name'], )
         elif endpoint == '/merge':
             pass
         return
