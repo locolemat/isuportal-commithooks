@@ -42,11 +42,10 @@ class RequestHandler(BaseHTTPRequestHandler):
         if endpoint == '/commit':
             send_commit_message(msg=data['commits'][0]['message'], author=data['commits'][0]['author']['name'], branch=data['ref'].split('/')[-1], url=data['commits'][0]['url'])
         elif endpoint == '/merge':
-            with open('log_merge.txt', 'a') as f:
-                f.write(str(data))
-                f.write('\n')
-
-            send_merge_message('Мерж залетел!')
+            # with open('log_merge.txt', 'a') as f:
+            #     f.write(str(data))
+            #     f.write('\n')
+            send_merge_message(action=data['action'], url=data['pull_request']['html_url'])
         return
 
 if __name__ == '__main__':
