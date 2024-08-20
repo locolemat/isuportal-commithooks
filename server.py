@@ -2,7 +2,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse
 import json
 
-from bot import send_commit_message
+from bot import send_commit_message, send_merge_message
 
 class RequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -42,7 +42,11 @@ class RequestHandler(BaseHTTPRequestHandler):
         if endpoint == '/commit':
             send_commit_message(msg=data['commits'][0]['message'], author=data['commits'][0]['author']['name'], branch=data['ref'].split('/')[-1], url=data['commits'][0]['url'])
         elif endpoint == '/merge':
-            pass
+            with open('log_merge.txt', 'a') as f:
+                f.write(str(data))
+                f.write('\n')
+
+            send_merge_message('Мерж залетел!')
         return
 
 if __name__ == '__main__':
