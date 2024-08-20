@@ -24,6 +24,10 @@ class RequestHandler(BaseHTTPRequestHandler):
         post_body = self.rfile.read(content_len)
         data = json.loads(post_body)
 
+        with open('log.txt', 'a') as f:
+            f.write(str(data))
+            f.write('\n')
+
         parsed_path = urlparse(self.path)
         self.send_response(200)
         self.end_headers()
