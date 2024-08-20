@@ -1,1 +1,1 @@
-# isuportal-commithooks
+# ISU Portal Commit Hooks
