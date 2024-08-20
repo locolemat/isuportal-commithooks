@@ -40,7 +40,8 @@ class RequestHandler(BaseHTTPRequestHandler):
         endpoint = self.path
 
         if endpoint == '/commit':
-            send_commit_message(msg=data['commits'][0]['message'], author=data['commits'][0]['author']['name'], branch=data['ref'].split('/')[-1], url=data['commits'][0]['url'])
+            for commit in data['commits']:
+                send_commit_message(msg=commit['message'], author=commit['author']['name'], branch=data['ref'].split('/')[-1], url=commit['url'])
         elif endpoint == '/merge':
             # with open('log_merge.txt', 'a') as f:
             #     f.write(str(data))

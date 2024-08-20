@@ -23,6 +23,6 @@ def send_commit_message(msg, author, branch, url):
 
 
 def send_merge_message(action, url):
-    if action == 'opened':
+    if action == 'merged':
         message = emojize(f":hammer_and_pick:Свежий пулл-реквест залетел!\n<b>Ссылка</b>: {url}")
         bot.send_message(chat_id=commit_chat, text=message, reply_markup=generate_commit_url_button(url))
