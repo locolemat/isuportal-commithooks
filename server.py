@@ -43,10 +43,13 @@ class RequestHandler(BaseHTTPRequestHandler):
             for commit in data['commits']:
                 send_commit_message(msg=commit['message'], author=commit['author']['name'], branch=data['ref'].split('/')[-1], url=commit['url'])
         elif endpoint == '/merge':
-            with open('log_merge.txt', 'a') as f:
-                f.write(str(data))
-                f.write('\n')
+            # with open('log_merge.txt', 'a') as f:
+            #     f.write(str(data))
+            #     f.write('\n')
             send_merge_message(action=data['action'], url=data['pull_request']['html_url'])
+        elif endpoint == '/welfare_check':
+            with open('log_merge.txt', 'a') as f:
+                f.write('The service is up and running!\n')
         return
 
 if __name__ == '__main__':
