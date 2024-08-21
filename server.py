@@ -1,6 +1,7 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse
 import json
+import os
 
 from bot import send_commit_message, send_merge_message
 
@@ -48,8 +49,8 @@ class RequestHandler(BaseHTTPRequestHandler):
             #     f.write('\n')
             send_merge_message(action=data['action'], url=data['pull_request']['html_url'])
         elif endpoint == '/welfare_check':
-            with open('log_merge.txt', 'a') as f:
-                f.write('The service is up and running!\n')
+            with open(os.path.join(os.path.dirname(__file__), 'log_merge.txt'), 'a') as f:
+                f.write('The service is up and running again!\n')
         return
 
 if __name__ == '__main__':
